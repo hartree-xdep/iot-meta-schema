@@ -1,0 +1,11 @@
+{
+    "title": "Example",
+    "$schema": "https://$domain/meta-schema#",
+    "description": "Example schema",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string"
+        }
+    }
+}

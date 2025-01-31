@@ -1,9 +1,18 @@
 # XDEP Devices Meta-schema
 
-This repository contains the meta-schema for validating the IoT devices schemas. The repository also contains some tests
-that assert some expectations from the meta-schema as well as test the schemas against it.
+This repository contains a template meta-schema and the generated meta-schemas for validating the IoT devices schemas in XDEP.
 
-## Running the tests
+The repository also contains some tests that assert some expectations from the meta-schema as well as test the schemas against it.
+
+## Generating Meta-schemas
+
+To generate a meta-schema for a domain, first add the domain to [`domains.txt`](./domains.txt), then run:
+
+```shell
+python -m generate
+```
+
+## Running The Tests
 
 To run the tests initialize your python environment by installing the dependencies
 from `requirements.txt`, then run:

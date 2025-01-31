@@ -41,7 +41,7 @@ def root_schema(property_schema_st = st.just({})):
     return st.fixed_dictionaries({
         "title": text_st(min_size=5, max_size=60),
         "description": text_st(),
-        "$schema": st.just("https://iot.smdh.uk/meta-schema#"),
+        "$schema": st.just("https://$domain/meta-schema#"),
         "type": st.just("object"),
         "properties": property_schema_st,
     })
@@ -53,7 +53,7 @@ VALID_MVDTYPES = ("int", "long", "float", "decimal", "bool")
 
 
 def create_meta_schema_validator():
-    with open('meta-schema') as f:
+    with open('template.meta-schema.json') as f:
         meta_schema = json.load(f)
     return validators.create(meta_schema)
 
@@ -76,7 +76,7 @@ class MetaSchemaTestCase(BaseTestCase):
     BASE_SCHEMA = {
         "title": "Test Schema",
         "description": "test description",
-        "$schema": "https://iot.smdh.uk/meta-schema#",
+        "$schema": "https://$domain/meta-schema#",
         "type": "object",
         "properties": {},
     }
@@ -196,7 +196,7 @@ class MetaSchemaTestCase(BaseTestCase):
 
     def test_devices_schemas_against_meta_schema(self):
         stack = contextlib.ExitStack()
-        for schema_path in pathlib.Path().glob('[!.]*/**/*.json'):
+        for schema_path in pathlib.Path().glob('schemas/**/*.json'):
             path = str(schema_path)
             with self.subTest(path=path), stack:
                 with open(path) as f:
@@ -309,7 +309,7 @@ def remote_arg_type(option):
             ] or not part3.isdigit()
         ):
             raise ValueError()
-    except:
+    except Exception:
         raise ValueError('expected remote argument to have a valid format')
     else:
         return region, table
